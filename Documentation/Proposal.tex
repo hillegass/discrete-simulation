@@ -1,35 +1,65 @@
-\documentclass[12pt]{article}
-\usepackage{amsmath}
-\usepackage{amssymb} 
-\usepackage{parskip}
-\usepackage{graphicx}
-\usepackage{listings}
-\usepackage{url}
-
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=0.75in]{geometry}
 
 \begin{document}
-\title{CSE 6730, Group 37 \\
-Event-Driven Simulation Proposal}
-\author{
-Aiswarya Bhagavatula  \\
-D. Aaron Hillegass (GTID 901988533) \\
-Siawpeng Er (GTID 903413430) \\
-Xiaotong Mu 
-}
-
-\date{January 20, 2020}
-\maketitle
-
-Our project is entitled \textbf{???}.
-
-\section{Problem Description and Purpose}
-
-The problem we are addressing is ???.
-
-\section{Tools and Methodology}
-
-We are going to ???.
-
-
-
+	\begin{center}
+    
+    	% MAKE SURE YOU TAKE OUT THE SQUARE BRACKETS
+		\LARGE{\textbf{CSE 6730, Group 37 Proposal}} \\
+        \vspace{1em}
+        \Large{Discrete Event Simulation} \\
+     
+	\end{center}
+    \begin{normalsize}
+    
+    	\section{Project Title:}
+        
+Simulation of Disease Progression of Sexually Transmitted Diseases at Home Care Community.
+      
+		\section{Team Members:}
+        
+      \begin{enumerate}
+      	\item Aiswarya Bhagavatula
+      	\item D. Aaron Hillegass (GTID 901988533)
+      	\item Siawpeng Er (GTID 903413430)
+      	\item Xiaotong Mu 
+      \end{enumerate}
+        
+	   	\section{Problem Description and Purpose:}
+        
+    Sexually transmitted diseases (STD) is one of the problems troubling home care community. [need some fact].\\
+    
+    Discrete Event Simulation (DES) was been used for long time in many healthcare simulation, ranging from health care system operation, disease progression modeling, screening modeling and health behavior modeling \cite{lebcir2017, Zhang2018}.  In our project, we wish to do a DES on home care unit. 
+        
+    \section{Methodology}
+    We shall get the data from the Centers for Disease Control and Prevention (CDC) website for the related information on the related STDs. This includings 
+    
+    \section{Development Platform}
+    The programming language is Python $3$. Depends on the suitability of the project, we plan to provide a Jupyter notebook for user interaction, or just a command line execution.
+    
+    \section{Data source}
+    We plan to obtain our data from CDC. The data is used for the projection of the disease progression. Subsequently, we shall use the data for designing the interaction within population in our simulated home care. 
+    
+    \section{Division of Labor}
+    As we move forward on our project, we plan to work concurrently. The timeline is as below:
+       
+    \begin{center}
+    	\begin{tabular}{ |c|c|c| } 
+    		\hline
+    		Task & Duration  \\ 
+    		\hline
+    		Data collection & 2 weeks \\ 
+    		Modeling design and implementaion & 4 weeks \\ 
+    		Modeling revised & 4 weeks \\ 
+    		\hline
+    	\end{tabular}
+    \end{center}
+    
+    
+    
+    \bibliographystyle{plain}
+    \bibliography{reference}
+\end{normalsize}
+  
 \end{document}
