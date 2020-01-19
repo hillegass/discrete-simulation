@@ -13,11 +13,11 @@
 	\end{center}
     \begin{normalsize}
     
-    	\section{Project Title:}
+    	\section{Project Title}
         
-Simulation of Disease Progression of Sexually Transmitted Diseases at Home Care Community.
+Simulation of the Spread of Syphilis within Group Housing for the Elderly
       
-		\section{Team Members:}
+		\section{Team Members}
         
       \begin{enumerate}
       	\item Aiswarya Bhagavatula (GTID 903540374)
@@ -26,16 +26,16 @@ Simulation of Disease Progression of Sexually Transmitted Diseases at Home Care 
       	\item Xiaotong Mu (GTID 903529807)
       \end{enumerate}
         
-	   	\section{Problem Description and Purpose:}
+	   	\section{Problem Description and Purpose}
         
-    Sexually transmitted diseases (STD) is one of the problems troubling home care community. According to Athena Health, patients over 60 account for the biggest increase of in-office treatments for sexually transmitted infections.\\
+    More and more communities of the elderly are suffering from outbreaks of sexually transmitted infections. According to Athena Health, patients over 60 account for the biggest increase of in-office treatments for sexually transmitted infections.
     
-
+    For this study, we are going to focus on Syphilis, but the methodology and resulting simulation could easily be applied to other treatable, non-deadly STIs like Chlamydia and Gonorrhea.
     
-    There are several factors that have led to the spread of STIs among older people:
+    There are several factors that have led to the spread of STIs among older people (especially in group housing):
     \begin{itemize}
 	\item Lack of safer sex practices (such as condom use) in older individuals. People who became sexually active before AIDS are less likely to follow safe sex practices.
-    \item Imbalance between the number of men and women. In retirement homes, there are typically significantly more women than men. It would not be surprising to find that the few healthy men would act as a nexus for sexually transmitted infections.
+    \item Imbalances between the number of men and women. In retirement homes, there are typically significantly more women than men. It would not be surprising to find that the few healthy men would act as a nexus for sexually transmitted infections.
     \item Shame around testing and treatment. Older people (especially married older people) might be reluctant to tell their doctor about symptoms, get tested, and pursue treatment.
     \item Number of opportunities for transmission. In earlier times, we could expect sexual activity to diminish in the aging population.  However, with people living longer, healthier lives and the proliferation of safe erectile dysfunction drugs, people in retirement communities are more sexually active than their parents were at the same age -- especially if they live in close community with a large number of potential partners.
     \end{itemize}
@@ -45,8 +45,8 @@ Simulation of Disease Progression of Sexually Transmitted Diseases at Home Care 
     
      A realistic simulation of the transmission of STIs in retirement homes could be useful in deciding between different interventions.  For example, would increasing condom use by 20\% be more effective than annual STI tests?
         
-    \section{Methodology}
-    We shall get the data from the Centers for Disease Control and Prevention (CDC) website for the related information on the related STDs. This includes:
+     \section{Data source}
+    We will get the data from the Centers for Disease Control and Prevention (CDC) website for parameters on Syphilis. This includes:
     \begin{itemize}
     \item Rates in the general population at the ages at which people would enter retirement homes
    	\item Likelihood of transmission for different types of sexual activity (intercourse, oral, anal).
@@ -71,12 +71,25 @@ Simulation of Disease Progression of Sexually Transmitted Diseases at Home Care 
     \item Types of sexual activity that they engage in (if possible)
    	\end{itemize}     
    	
+   	\section{Methodology}
+   	Our simulation will first simulate a population of people entering and exiting a single retirement community. It will use stochastic methods to give them an initial age, gender, and infection status.  It will also remove these people as the get older and move somewhere else or die. When someone dies or moves away, 
+   	
+   	Within that population, we will update each individual's infection status as they become infected and get treated. We will also track if they have become symptomatic. Thus, each time an uninfected person engages in sexual activity with an infected person, we will roll the dice to decide if the uninfected person becomes infected. Each person will be symptomatic for some amount of time before seeking testing and treatment.
+   	
+   	We will test different interventions:
+   	\begin{itemize}
+    \item Increasing condom usage
+    \item Periodic testing and treatment of the whole community 
+    \item Promoting monogamous fluid bonding
+	\item Working toward equal numbers of men and women in the community
+   	\end{itemize}     
     
     \section{Development Platform}
     The programming language is Python $3$. Depends on the suitability of the project, we plan to provide a Jupyter notebook for user interaction, or just a command line execution.
     
-    \section{Data source}
-    We plan to obtain our data from CDC. The data is used for the projection of the disease progression. Subsequently, we shall use the data for designing the interaction within population in our simulated home care. 
+    We will use heapq as our priority queue.
+    
+    We will use Matplotlib to do our data visualization.
     
     \section{Division of Labor}
     As we move forward on our project, we plan to work concurrently. The timeline is as below:
