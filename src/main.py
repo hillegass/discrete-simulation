@@ -19,4 +19,7 @@ world = World.World(parameters, logfile)
 while world.has_events() and world.day < 365 * 100:
     world.process()
 
-sys.stderr.write('Done\n'.format(world.day))
+sys.stderr.write('Done\n')
+
+# Explicitly close the log file
+logfile.close()

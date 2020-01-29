@@ -1,6 +1,7 @@
 import sys
 import random
 import Event
+import Person
 
 all_rooms = {}
 
@@ -10,14 +11,38 @@ class OccupyEvent (Event.Event):
         self.room = room
     
     def execute(self, world):
-        sys.stderr.write('Executing OccupyEvent for Room \'{}\' on day {}\n'.format(self.room.id, world.day))
-        pass
+        
+        # Does it go to a married couple?
+        prob_new_room_for_married = world.parameters['prob_new_room_for_married']
+        if random.random() < prob_new_room_for_married:
+            # Create male
+            resident1 = Person.Person(True, self.room)
+            resident1.set_random_birthday(world)
+            # departure_day = resident1.schedule_for_random_departure(world)
+            resident1.schedule_for_death(world)
+            # Create female
+            resident2 = Person.Person(False, self.room)
+            resident2.birthday = resident1.birthday
+            # resident2.resident1.schedule_for_departure(world, departure_day)
+            resident2.schedule_for_death(world)
+
+        else:
+            # Is this a male?
+            is_male = random.random() < world.parameters['prob_new_single_male']
+            resident = Person.Person(True, self.room)
+            resident.set_random_birthday(world)
+            # resident.schedule_for_random_departure(world)
+            resident.schedule_for_death(world)
+
+        sys.stderr.write('New residents: {} for Room \'{}\' on day {}\n'.format(self.room.residents, self.room.id, world.day))
+        
+
 
 
 class Room:
 
     def __init__(self, cluster_num, room_num):
-        self.id = '{}:{}'.format(cluster_num, room_num)
+        self.id = '{}-{}'.format(cluster_num, room_num)
         self.room_num = room_num
         self.cluster_num = cluster_num
         self.residents = []
@@ -25,9 +50,10 @@ class Room:
 
     def schedule_for_occupant(self, world):
         empty_date = world.day
+        max_days_room_empty = world.parameters['max_days_room_empty']
 
-        # A room will sit empty for a random number of days between 1 and 90
-        event = OccupyEvent(world.day + random.randint(1, 90), self)
+        # A room will sit empty for a random number of days between 1 and max_days_room_empty
+        event = OccupyEvent(world.day + random.randint(1, max_days_room_empty), self)
         world.add_event(event)
 
 def CreateEmptyRooms(world):

@@ -1,5 +1,7 @@
 class Event:
+
     def __init__(self, day):
+        self.id = 0
         self.day = day
     
     def __lt__(self, other):

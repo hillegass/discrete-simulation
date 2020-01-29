@@ -1,3 +1,4 @@
+# Try to put all the assumptions in this file
 def CreateParametersDictionary():
     params = {}
     params['logfilename'] = 'eventlog.txt'
@@ -7,4 +8,8 @@ def CreateParametersDictionary():
     params['prob_new_single_male'] = 0.3
     params['max_age_male_resident'] = 365 * 90
     params['max_age_female_resident'] = 365 * 95
+    params['mean_age_new_resident'] = 365 * 72
+    params['sd_age_new_resident'] = 365 * 7
+
+    params['max_days_room_empty'] = 90
     return params
