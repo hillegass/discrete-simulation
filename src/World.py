@@ -3,6 +3,7 @@ import Room
 import sys
 import utility
 
+
 class World:
 
     def __init__(self, params, log):
@@ -63,4 +64,3 @@ class World:
             self.update_for_day(next_event.day)
 
         next_event.execute(self)
-    
