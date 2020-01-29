@@ -29,7 +29,7 @@ class OccupyEvent (Event.Event):
         else:
             # Is this a male?
             is_male = random.random() < world.parameters['prob_new_single_male']
-            resident = Person.Person(True, self.room)
+            resident = Person.Person(is_male, self.room)
             resident.set_random_birthday(world)
             # resident.schedule_for_random_departure(world)
             resident.schedule_for_death(world)
