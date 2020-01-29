@@ -15,8 +15,8 @@ logfile = open(parameters['logfilename'], 'w')
 # Create the world
 world = World.World(parameters, logfile)
 
-# Run for one hundred years
-while world.has_events() and world.day < 365 * 100:
+# Run for twelve years
+while world.has_events() and world.day < 365 * 12:
     world.process()
 
 sys.stderr.write('Done\n')

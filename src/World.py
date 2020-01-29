@@ -1,6 +1,7 @@
 import heapq as q
 import Room
 import sys
+import utility
 
 class World:
 
@@ -49,7 +50,7 @@ class World:
 
     # Update the day (may need to update world state)
     def update_for_day(self, new_day):
-        sys.stderr.write('Starting day {}\n'.format(new_day))
+        sys.stderr.write('Starting day {}\n'.format(utility.str_for_day(new_day)))
         self.day = new_day
 
     # Pop the next event off the priority queue and execute it

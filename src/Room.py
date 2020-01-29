@@ -2,6 +2,7 @@ import sys
 import random
 import Event
 import Person
+import utility as u
 
 all_rooms = {}
 
@@ -23,7 +24,7 @@ class OccupyEvent (Event.Event):
             # Create female
             resident2 = Person.Person(False, self.room)
             resident2.birthday = resident1.birthday
-            # resident2.resident1.schedule_for_departure(world, departure_day)
+            # resident2.schedule_for_departure(world, departure_day)
             resident2.schedule_for_death(world)
 
         else:
@@ -34,7 +35,7 @@ class OccupyEvent (Event.Event):
             # resident.schedule_for_random_departure(world)
             resident.schedule_for_death(world)
 
-        sys.stderr.write('New residents: {} for Room \'{}\' on day {}\n'.format(self.room.residents, self.room.id, world.day))
+        sys.stderr.write('New residents: {} for Room \'{}\' on day {}\n'.format(self.room.residents, self.room.id, u.str_for_day(world.day)))
         
 
 
