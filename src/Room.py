@@ -15,7 +15,7 @@ class OccupyEvent (Event.Event):
         
         # Does it go to a married couple?
         prob_new_room_for_married = world.parameters['prob_new_room_for_married']
-        if random.random() < prob_new_room_for_married:
+        if random.uniform(0,1) < prob_new_room_for_married:
             # Create male
             resident1 = Person.Person(True, self.room)
             resident1.set_random_birthday(world)
@@ -29,7 +29,7 @@ class OccupyEvent (Event.Event):
 
         else:
             # Is this a male?
-            is_male = random.random() < world.parameters['prob_new_single_male']
+            is_male = random.uniform(0,1) < world.parameters['prob_new_single_male']
             resident = Person.Person(is_male, self.room)
             resident.set_random_birthday(world)
             # resident.schedule_for_random_departure(world)
