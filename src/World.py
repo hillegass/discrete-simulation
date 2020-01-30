@@ -3,6 +3,7 @@ import Room
 import sys
 import utility
 
+
 class World:
 
     def __init__(self, params, log):
@@ -50,7 +51,8 @@ class World:
 
     # Update the day (may need to update world state)
     def update_for_day(self, new_day):
-        sys.stderr.write('Starting day {}\n'.format(utility.str_for_day(new_day)))
+        sys.stderr.write('Starting day {}\n'.format(
+            utility.str_for_day(new_day)))
         self.day = new_day
 
     # Pop the next event off the priority queue and execute it
@@ -63,4 +65,3 @@ class World:
             self.update_for_day(next_event.day)
 
         next_event.execute(self)
-    
