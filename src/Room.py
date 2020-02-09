@@ -22,13 +22,17 @@ class OccupyEvent (Event.Event):
                 # Create male
                 resident1 = Person.Person(True, self.room)
                 resident1.set_random_birthday(world)
-                resident1.schedule_for_death(world)
+                #resident1.schedule_for_death(world)
+                resident1.set_couple_status(1)
+                resident1.risk_allocation(world)
                 # Create female
                 resident2 = Person.Person(False, self.room)
                 # random number at from the partner between -5 and 5 age
                 resident2.age = resident1.age + random.randrange(-5, 5)
                 resident2.reverse_birthday(world)
-                resident2.schedule_for_death(world)
+                resident2.set_couple_status(1)
+                resident2.risk_allocation(world)
+                #resident2.schedule_for_death(world)
                 sys.stderr.write('Executing OccupyEvent for Marriage couple Room \'{}\' with {} female and {} male on day {}\n'.format(
                     self.room.id, world.rooms[self.room.id].female, world.rooms[self.room.id].male, world.day))
             else:
@@ -42,6 +46,8 @@ class OccupyEvent (Event.Event):
                 world.rooms[self.room.id].healthy += 1
                 resident = Person.Person(is_male, self.room)
                 resident.set_random_birthday(world)
+                resident.set_couple_status(0)
+                resident.risk_allocation(world)
                 #sys.stderr.write('resident age {}\n'.format(resident.age))
                 # resident.schedule_for_random_departure(world)
                 resident.schedule_for_death(world)
@@ -61,14 +67,26 @@ class SexualEvent (Event.Event):
         self.room = room
 
     def execute(self, world):
-        chance = random.uniform(0, 1)
-        if chance > world.parameters['std_probability']:
-            totalhealthy = world.rooms[self.room.id].healthy
-            number_of_case = random.randint(1, totalhealthy)
-            world.rooms[self.room.id].healthy -= number_of_case
-            world.rooms[self.room.id].affected += number_of_case
-            sys.stderr.write('{} case of STD at room {}\n'.format(
-                number_of_case, self.room.id))
+        chance = random.uniform(0, 1) 
+        femaleResident = world.rooms[self.room.id].femaleResidents
+        maleResident = world.rooms[self.room.id].maleResidents
+        number_of_case = 0 
+
+        for i in range(len(femaleResident)):
+            femaleRisk = femaleResident[0].is_affected_probability()
+            if chance > femaleRisk:
+                world.rooms[self.room.id].healthy -= 1
+                world.rooms[self.room.id].affected += 1
+                number_of_case += 1
+        
+        for i in range(len(maleResident)):
+            maleRisk = maleResident[0].is_affected_probability()
+            if chance > maleRisk:
+                world.rooms[self.room.id].healthy -= 1
+                world.rooms[self.room.id].affected += 1
+                number_of_case += 1
+
+        sys.stderr.write('{} case of STD at room {}\n'.format(number_of_case, self.room.id))
         pass
 
 

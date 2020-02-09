@@ -13,20 +13,20 @@ def CreateParametersDictionary():
     params['max_days_room_empty'] = 90
     
     # std param
-    # fraction of the population defined as high risk
+    # fraction of the population defined as high risk, we could easily use only high risk (HR) probability, then low risk (LR) is just 1 - HR
     params['HR'] = 0.1
     params['LR'] = 0.9
-    params['std_probability'] = 0.5
+    params['std_probability'] = [0.5]
 
     # casual partners
-    params['std_65_79_HR'] = ['beta', 3, 60 ]
-    params['std_80_95_HR'] = ['beta', 3, 4000]
-    params['std_65_79_LR'] = ['beta', 1, 160]
-    params['std_80_95_LR'] = ['beta', 1, 160]
+    params['casual_std_65_79_HR'] = ['beta', 3, 60 ]
+    params['casual_std_80_95_HR'] = ['beta', 3, 4000]
+    params['casual_std_65_79_LR'] = ['beta', 1, 160]
+    params['casual_std_80_95_LR'] = ['beta', 1, 160]
 
     # among paired
-    params['std_65_79_HR'] = ['beta', 10, 70]
-    params['std_80_95_HR'] = ['beta', 10, 100]
+    params['paired_std_65_79_HR'] = ['beta', 10, 70]
+    params['paired_std_80_95_LR'] = ['beta', 10, 100]
     
     # testing of the symptomatic, all using Beta distribution
     # formula 1/(52 * (0.079 + 0.072 * Beta(4,4)))
