@@ -22,12 +22,12 @@ class OccupyEvent (Event.Event):
                 # Create male
                 resident1 = Person.Person(True, self.room)
                 resident1.set_random_birthday(world)
-                # departure_day = resident1.schedule_for_random_departure(world)
                 resident1.schedule_for_death(world)
                 # Create female
                 resident2 = Person.Person(False, self.room)
-                resident2.birthday = resident1.birthday
-                # resident2.schedule_for_departure(world, departure_day)
+                # random number at from the partner between -5 and 5 age
+                resident2.age = resident1.age + random.randrange(-5, 5)
+                resident2.reverse_birthday(world)
                 resident2.schedule_for_death(world)
                 sys.stderr.write('Executing OccupyEvent for Marriage couple Room \'{}\' with {} female and {} male on day {}\n'.format(
                     self.room.id, world.rooms[self.room.id].female, world.rooms[self.room.id].male, world.day))
@@ -42,11 +42,12 @@ class OccupyEvent (Event.Event):
                 world.rooms[self.room.id].healthy += 1
                 resident = Person.Person(is_male, self.room)
                 resident.set_random_birthday(world)
+                #sys.stderr.write('resident age {}\n'.format(resident.age))
                 # resident.schedule_for_random_departure(world)
                 resident.schedule_for_death(world)
 
                 sys.stderr.write('Executing OccupyEvent for Single Room \'{}\' with {} female and {} male on day {}\n'.format(
-                    self.room.id, world.rooms[self.room.id].female, world.rooms[self.room.id].male, world.day))
+                    self.room.id, world.rooms[self.room.id].female, world.rooms[self.room.id].male,  world.day))
 
             if world.rooms[self.room.id].female > 0 and world.rooms[self.room.id].male > 0:
                 event = SexualEvent(
@@ -61,7 +62,7 @@ class SexualEvent (Event.Event):
 
     def execute(self, world):
         chance = random.uniform(0, 1)
-        if chance > world.parameters['std_probabability']:
+        if chance > world.parameters['std_probability']:
             totalhealthy = world.rooms[self.room.id].healthy
             number_of_case = random.randint(1, totalhealthy)
             world.rooms[self.room.id].healthy -= number_of_case
@@ -76,7 +77,8 @@ class Room:
         self.id = '{}:{}'.format(cluster_num, room_num)
         self.room_num = room_num
         self.cluster_num = cluster_num
-        self.residents = []
+        self.femaleResidents = [] # female resident list
+        self.maleResidents = [] # male resident list
         self.totalResidents = 0
         self.female = 0  # female population
         self.male = 0  # male population
