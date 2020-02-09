@@ -50,7 +50,7 @@ class OccupyEvent (Event.Event):
                 resident.risk_allocation(world)
                 #sys.stderr.write('resident age {}\n'.format(resident.age))
                 # resident.schedule_for_random_departure(world)
-                resident.schedule_for_death(world)
+                #resident.schedule_for_death(world)
 
                 sys.stderr.write('Executing OccupyEvent for Single Room \'{}\' with {} female and {} male on day {}\n'.format(
                     self.room.id, world.rooms[self.room.id].female, world.rooms[self.room.id].male,  world.day))
