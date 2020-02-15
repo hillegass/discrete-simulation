@@ -1,0 +1,111 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{url}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{float}
+\usepackage{graphicx}
+
+\setlength{\parskip}{0.7em}
+\setlength{\parindent}{0em}
+
+\begin{document}
+	\begin{center}
+    
+    	% MAKE SURE YOU TAKE OUT THE SQUARE BRACKETS
+		\LARGE{\textbf{CSE 6730, Group 37}} \\
+        \vspace{1em}
+        \Large{Description of parameters governing testing, natural recovery and transmission probability} \\
+     
+	\end{center}
+    \begin{normalsize}
+    
+
+   	
+   	\section{Assumptions}
+   	
+   	Assumptions:\\
+   	\begin{itemize}
+   	    \item Only unprotected acts modeled in this analysis
+   	    \item No age mixing input preference
+   	    \item Partner notification is stratified by sex and age, however in the absence of data on changes in this prevention strategy, the parameters are kept time invariant
+   	    \item Only heterosexual partnerships.
+   	    \item Treatment ensued immediately following identification of infection, although this may not always happen in practice.
+   	\end{itemize}\\
+    
+
+	
+	\begin{table}[H]
+	\centering
+    	\begin{tabular}{ |p{5cm}|p{7cm}|p{5cm}| } 
+    		\hline
+    		Parameter/Variable & Description & Distribution  \\ 
+    		\hline
+    		Population size & Population size for each age group & Uniformly distributed\\
+    		Time step &	Time step implemented in the model & 	A day \\
+			High risk & Fraction of the population defined as high risk	& 10\% (Assumption) \\
+			Low risk & Fraction of the population defined as low risk & 90\% (Assumption)\\
+			\hline
+			\multicolumn{3}{|c|}{Testing symptomatic individuals} \\
+			\hline
+			Women &	Testing of symptomatic  women	& 1/(52*(0.079+0.072*Beta(4,4)))\\
+			Men	& Testing of symptomatic men	& 1/(52*(0.079+0.072*Beta(4,4)))\\
+			\hline
+			
+			\multicolumn{3}{|c|}{Casual partners} \\
+			\hline
+			High risk(HR)& Single, 65-79 HR	& Beta(3,60)\\
+ 						 & Single, 80-95 HR	& Beta(3,400)\\
+			Low risk(LR)	 & Single, 65-79 LR	& Beta(1,160) \\
+ 						 & Single, 80-95 LR	&Beta(1,160)\\
+ 			\hline
+ 			\multicolumn{3}{|c|}{Among paired} \\
+ 			\hline
+			High risk(HR)& Single, 65-79 HR	& Beta(10,70)\\
+			Low risk(LR) & Single, 80-95 LR	& Beta(10,100)\\
+			\hline
+			
+		\multicolumn{3}{|c|}{Transmission} \\
+			\hline
+			Transmission probability & & Beta(5.5, 50)))\\
+    		\hline
+    		
+		\multicolumn{3}{|c|}{Natural recovery} \\
+			\hline
+			Women & & 1/(52*(1.13+0.5*Beta(4,4.969)))\\
+			Men & & 1/(52*(1.13+0.5*Beta(4,4.969)))\\
+			Transmission probability	 & Per act probability	& Beta(5.5, 50)\\
+    		\hline
+    	
+    	\multicolumn{3}{|c|}{Transmission Success} \\
+    	    \hline
+			Efficiency of antibiotics & & Beta(190,8)))\\
+    		\hline
+
+    	\multicolumn{3}{|c|}{Partner Notification} \\
+    	    \hline
+			Women&Age65-79&Beta(4,3)\\
+			&Age80-95&Beta(4,3)
+			\\
+			Men&Age65-79&Beta(4,3)\\
+			&Age80-95&Beta(4,3)\\
+    		\hline
+    
+    		   		
+    		
+    		
+    		
+    	\end{tabular}
+    	\label{tab:parameter}
+    	\caption{Description of parameters governing testing, natural recovery and transmission probability}
+   \end{table}
+   
+   	we chose to fix the fraction of the population defined as high risk at constant 10\%, but accommodate uncertainty in levels of risk behavior by varying the partner change rates by relationship states and age, in each of the risk groups. Defining a set proportion of the population to belong to a risk group and varying partner change rates is a modeling convention
+
+    
+
+	
+
+
+\end{normalsize}
+  
+\end{document}
