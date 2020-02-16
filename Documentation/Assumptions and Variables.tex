@@ -22,8 +22,6 @@
 
    	
    	\section{Assumptions}
-   	
-   	Assumptions:\\
    	\begin{itemize}
    	    \item Only unprotected acts modeled in this analysis
    	    \item No age mixing input preference
@@ -67,6 +65,7 @@
 		\multicolumn{3}{|c|}{Transmission} \\
 			\hline
 			Transmission probability &Per act probability & Beta(5.5, 50)))\\
+			With condom protection & condom effect parameter estimate is 1.6&Beta(5.5,50)^{1.6}\\
     		\hline
     		
 		\multicolumn{3}{|c|}{Natural recovery} \\
@@ -89,10 +88,19 @@
 			Men&Age65-79&Beta(4,3)\\
 			&Age80-95&Beta(4,3)\\
     		\hline
-    
+        	\multicolumn{3}{|c|}{Condom Use} \\
+    	    \hline
+			Casual partners&Weighted prevalence & 0.131\\
+			Paired & Weighted prevalence & 0.368
+			\\
+    		\hline
+    		
+	
+        	
     		   		
     		
-    		
+% https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5477642/
+
     		
     	\end{tabular}
     	\label{tab:parameter}
