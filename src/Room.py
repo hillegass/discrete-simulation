@@ -2,6 +2,7 @@ import sys
 import random
 import Event
 import Person
+import numpy as np
 
 all_rooms = {}
 
@@ -75,16 +76,23 @@ class SexualEvent (Event.Event):
         maleResident = world.rooms[self.room.id].maleResidents
         number_of_case = 0
 
+        notification_parameter = world.parameters['notification']
+        chance_of_notification = np.random.beta(
+            notification_parameter[1], notification_parameter[2])
+
         for i in range(len(femaleResident)):
-            femaleRisk = femaleResident[0].is_affected_probability(world)
-            if chance > femaleRisk:
+            femaleRisk = femaleResident[i].is_affected_probability(world)
+            # notified by partner, so not doing sexual event
+            notificationByPartner = random.uniform(0, 1)
+            if chance > femaleRisk and notificationByPartner > chance_of_notification:
                 world.rooms[self.room.id].healthy -= 1
                 world.rooms[self.room.id].affected += 1
                 number_of_case += 1
 
         for i in range(len(maleResident)):
-            maleRisk = maleResident[0].is_affected_probability(world)
-            if chance > maleRisk:
+            notificationByPartner = random.uniform(0, 1)
+            maleRisk = maleResident[i].is_affected_probability(world)
+            if chance > maleRisk and notificationByPartner > chance_of_notification:
                 world.rooms[self.room.id].healthy -= 1
                 world.rooms[self.room.id].affected += 1
                 number_of_case += 1
