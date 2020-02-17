@@ -35,6 +35,10 @@ def CreateParametersDictionary():
     params['woman_test_symptomatic'] = [52, 0.079, 0.072, 'beta', 4, 4] 
     params['man_test_symptomatic'] = [52, 0.079, 0.072, 'beta', 4, 4]
 
+    # treatment choice
+    # natural or antibiotics
+    params['choice_of_treatment'] = 'antibiotics'
+    
     # natural recovery
     # formula 1/(52*(1.13 + 0.5* Beta(4,4.496)))
     params['woman_nr'] = [52, 1.13, 0.5, 'beta', 4, 4.969]

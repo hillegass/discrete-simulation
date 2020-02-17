@@ -65,6 +65,53 @@ class OccupyEvent (Event.Event):
                 world.add_event(event)
 
 
+class TreatmentEvent (Event.Event):
+    def __init__(self, day, room):
+        super(TreatmentEvent, self).__init__(day)
+        self.room = room
+
+    def execute(self, world):
+        old_case = world.rooms[self.room.id].affected
+        treatment_choice = world.parameters['choice_of_treatment']
+        if treatment_choice == 'antibiotics':
+            recovery_param = world.parameters['antibiotics']
+            male_recovery_chance = female_recovery_chance = np.random.beta(
+                recovery_param[1], recovery_param[2])
+        else:
+            female_recovery_param = world.parameters['woman_nr']
+            male_recovery_param = world.parameters['man_nr']
+            male_recovery_chance = 1/(52*(1.13+0.5*np.random.beta(
+                male_recovery_param[1], recovery_param[2])))
+            female_recovery_chance = 1/(52*(1.13+0.5*np.random.beta(
+                female_recovery_param[1], recovery_param[2])))
+
+        femaleResident = world.rooms[self.room.id].femaleResidents
+        maleResident = world.rooms[self.room.id].maleResidents
+
+        chance_of_success = random.uniform(0, 1)
+
+        for i in range(len(femaleResident)):
+            femaleAffected = femaleResident[i].is_infected
+
+            if femaleAffected and chance_of_success <= female_recovery_chance:
+                world.rooms[self.room.id].healthy += 1
+                world.rooms[self.room.id].affected -= 1
+                femaleResident[i].is_infected = False
+
+        for i in range(len(maleResident)):
+            maleAffected = maleResident[i].is_infected
+
+            if maleAffected and chance_of_success <= male_recovery_chance:
+                world.rooms[self.room.id].healthy += 1
+                world.rooms[self.room.id].affected -= 1
+                maleResident[i].is_infected = False
+
+        if old_case > 0:
+            sys.stderr.write('{} affected of STD at room {} reduced to {} \n'.format(
+                old_case, self.room.id, self.room.affected))
+        pass
+
+
 class SexualEvent (Event.Event):
     def __init__(self, day, room):
         super(SexualEvent, self).__init__(day)
@@ -85,17 +132,28 @@ class SexualEvent (Event.Event):
             # notified by partner, so not doing sexual event
             notificationByPartner = random.uniform(0, 1)
             if chance > femaleRisk and notificationByPartner > chance_of_notification:
+                femaleResident[i].is_infected = True
                 world.rooms[self.room.id].healthy -= 1
                 world.rooms[self.room.id].affected += 1
                 number_of_case += 1
+
+                # put in treatment
+                event = TreatmentEvent(
+                    world.day + random.randint(1, 10), self.room)
+                world.add_event(event)
 
         for i in range(len(maleResident)):
             notificationByPartner = random.uniform(0, 1)
             maleRisk = maleResident[i].is_affected_probability(world)
             if chance > maleRisk and notificationByPartner > chance_of_notification:
+                maleResident[i].is_infected = True
                 world.rooms[self.room.id].healthy -= 1
                 world.rooms[self.room.id].affected += 1
                 number_of_case += 1
+                # put in treatment
+                event = TreatmentEvent(
+                    world.day + random.randint(1, 10), self.room)
+                world.add_event(event)
 
         sys.stderr.write('{} case of STD at room {}\n'.format(
             number_of_case, self.room.id))
@@ -124,6 +182,10 @@ class Room:
         event = OccupyEvent(world.day + random.randint(1, 90), self)
         world.add_event(event)
 
+    # def schedule_for_treatment(self, world):
+    #     event = TreatmentEvent(world.day, self)
+    #     world.add_event(event)
+
 
 def CreateEmptyRooms(world):
     """ Creating only empty rooms so the world has the whole map 
@@ -144,3 +206,8 @@ def CreateEmptyRooms(world):
 def InitRoom(world):
     for _, room in world.rooms.items():
         room.schedule_for_occupant(world)
+
+
+# def InitTreatment(world):
+#     for _, room in world.rooms.items():
+#         room.schedule_for_treatment(world)
