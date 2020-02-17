@@ -15,14 +15,16 @@ class OccupyEvent (Event.Event):
         if self.room.id in world.rooms:
              # Does it go to a married couple?
             prob_new_room_for_married = world.parameters['prob_new_room_for_married']
+
             if random.uniform(0, 1) < prob_new_room_for_married:
                 world.rooms[self.room.id].male += 1
                 world.rooms[self.room.id].female += 1
                 world.rooms[self.room.id].healthy += 2
+                world.rooms[self.room.id].room_type = 1
                 # Create male
                 resident1 = Person.Person(True, self.room)
                 resident1.set_random_birthday(world)
-                #resident1.schedule_for_death(world)
+                # resident1.schedule_for_death(world)
                 resident1.set_couple_status(1)
                 resident1.risk_allocation(world)
                 # Create female
@@ -32,10 +34,11 @@ class OccupyEvent (Event.Event):
                 resident2.reverse_birthday(world)
                 resident2.set_couple_status(1)
                 resident2.risk_allocation(world)
-                #resident2.schedule_for_death(world)
+                # resident2.schedule_for_death(world)
                 sys.stderr.write('Executing OccupyEvent for Marriage couple Room \'{}\' with {} female and {} male on day {}\n'.format(
                     self.room.id, world.rooms[self.room.id].female, world.rooms[self.room.id].male, world.day))
             else:
+                world.rooms[self.room.id].room_type = 0
                 # Is this a male?
                 is_male = random.uniform(
                     0, 1) < world.parameters['prob_new_single_male']
@@ -50,7 +53,7 @@ class OccupyEvent (Event.Event):
                 resident.risk_allocation(world)
                 #sys.stderr.write('resident age {}\n'.format(resident.age))
                 # resident.schedule_for_random_departure(world)
-                #resident.schedule_for_death(world)
+                # resident.schedule_for_death(world)
 
                 sys.stderr.write('Executing OccupyEvent for Single Room \'{}\' with {} female and {} male on day {}\n'.format(
                     self.room.id, world.rooms[self.room.id].female, world.rooms[self.room.id].male,  world.day))
@@ -67,26 +70,27 @@ class SexualEvent (Event.Event):
         self.room = room
 
     def execute(self, world):
-        chance = random.uniform(0, 1) 
+        chance = random.uniform(0, 1)
         femaleResident = world.rooms[self.room.id].femaleResidents
         maleResident = world.rooms[self.room.id].maleResidents
-        number_of_case = 0 
+        number_of_case = 0
 
         for i in range(len(femaleResident)):
-            femaleRisk = femaleResident[0].is_affected_probability()
+            femaleRisk = femaleResident[0].is_affected_probability(world)
             if chance > femaleRisk:
                 world.rooms[self.room.id].healthy -= 1
                 world.rooms[self.room.id].affected += 1
                 number_of_case += 1
-        
+
         for i in range(len(maleResident)):
-            maleRisk = maleResident[0].is_affected_probability()
+            maleRisk = maleResident[0].is_affected_probability(world)
             if chance > maleRisk:
                 world.rooms[self.room.id].healthy -= 1
                 world.rooms[self.room.id].affected += 1
                 number_of_case += 1
 
-        sys.stderr.write('{} case of STD at room {}\n'.format(number_of_case, self.room.id))
+        sys.stderr.write('{} case of STD at room {}\n'.format(
+            number_of_case, self.room.id))
         pass
 
 
@@ -94,9 +98,10 @@ class Room:
     def __init__(self, cluster_num, room_num):
         self.id = '{}:{}'.format(cluster_num, room_num)
         self.room_num = room_num
+        self.room_type = 0  # 0 is single, 1 is couple room
         self.cluster_num = cluster_num
-        self.femaleResidents = [] # female resident list
-        self.maleResidents = [] # male resident list
+        self.femaleResidents = []  # female resident list
+        self.maleResidents = []  # male resident list
         self.totalResidents = 0
         self.female = 0  # female population
         self.male = 0  # male population

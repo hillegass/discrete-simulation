@@ -16,7 +16,7 @@ def CreateParametersDictionary():
     # fraction of the population defined as high risk, we could easily use only high risk (HR) probability, then low risk (LR) is just 1 - HR
     params['HR'] = 0.1
     params['LR'] = 0.9
-    params['std_probability'] = 0.5
+    params['std_probability'] = [0.5]
     params['std_with_condom'] = ['beta', 5.5, 50, 1.6]
     params['std_without_condom'] = ['beta', 5.5, 50]
 
