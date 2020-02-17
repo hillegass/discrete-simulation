@@ -16,7 +16,9 @@ def CreateParametersDictionary():
     # fraction of the population defined as high risk, we could easily use only high risk (HR) probability, then low risk (LR) is just 1 - HR
     params['HR'] = 0.1
     params['LR'] = 0.9
-    params['std_probability'] = [0.5]
+    params['std_probability'] = 0.5
+    params['std_with_condom'] = ['beta', 5.5, 50, 1.6]
+    params['std_without_condom'] = ['beta', 5.5, 50]
 
     # casual partners
     params['casual_std_65_79_HR'] = ['beta', 3, 60 ]
@@ -35,7 +37,17 @@ def CreateParametersDictionary():
 
     # natural recovery
     # formula 1/(52*(1.13 + 0.5* Beta(4,4.496)))
-    params['woman_nr'] = [51, 1.13, 0.5, 'beta', 4, 4.969]
-    params['man_nr'] = [51, 1.13, 0.5, 'beta', 4, 4.969]
+    params['woman_nr'] = [52, 1.13, 0.5, 'beta', 4, 4.969]
+    params['man_nr'] = [52, 1.13, 0.5, 'beta', 4, 4.969]
+
+    # treatment success
+    params['antibiotics'] = ['beta', 190, 8]
+
+    # intervention 1 - partner notification, this happen when patients notify their partners
+    params['notification'] = ['beta', 4, 3]
+
+    # intervention 2 - condom usage how likely resident use condom
+    params['condom_casual_partner'] = 0.131
+    params['condom_paired_partner'] = 0.368
 
     return params
