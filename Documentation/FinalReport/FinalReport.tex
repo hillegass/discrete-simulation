@@ -152,8 +152,9 @@ Simulation of the Spread of Syphilis within Group Housing for the Elderly
 			Transmission probability	 & Per act probability	& Beta(5.5, 50)\\
     		\hline
     	\end{tabular}
-    	\label{tab:parameter}
+    	
     	\caption{Description of parameters governing testing, natural recovery and transmission probability}
+    	\label{tab:parameter}
    \end{table}
    
    	we chose to fix the fraction of the population defined as high risk at constant 10\%, but accommodate uncertainty in levels of risk behavior by varying the partner change rates by relationship states and age, in each of the risk groups. Defining a set proportion of the population to belong to a risk group and varying partner change rates is a modeling convention
@@ -173,22 +174,25 @@ Simulation of the Spread of Syphilis within Group Housing for the Elderly
     \section{Development Platform}
     The programming language is Python $3$. Depends on the suitability of the project, we plan to provide a Jupyter notebook for user interaction, or just a command line execution.
     
-    We will use heapq as our priority queue.
-    
+    We will use heapq as our priority queue. This priority queue is also our future event list (FEL) in our simulation event. All the events will be sent to here and execute according to chronological order.
+     
 	\subsection{Development}
-	Currently, we have successfully model the World as our simulation environment. We have a set of parameters as per Table \ref{tab:parameter2}. The parameters will be updated and replaced if more suitable parameters needed.
+	In our final software, we successfully create a one priority queue future event list (FEL) based discrete event simulation (DES).  
+	We have successfully model the World as our simulation environment. We have a set of parameters as per Table \ref{tab:parameter2} with their corresponding description.
 	
-	For checkpoint 1, we successfully create a simple version to have room occupied with couple or non couple. We first create the new clusters and rooms. The rooms may be occupied by couple or non couple. If more than one female and male in the room, a chance of sexual activity may occured. This resulting in the occurrence of sexually transmitted infection (STI).
+	As a brief description of our system, we simulated a elderly house based on the data we obtained to get the population distribution of the residents involved. Room will be allocated to the residents, according to couple or just some single room, we simulate sometime some single room will be occupied with more than $1$ person of different gender to simulate a possible sexual activity event.
 	
-	We shall include more working flow, especially on the intervention, treatment and prevention on our current model, so as to reflect more realistic conditions. This also serve as useful model to investigate the effect of different intervention.
+	Upon sexual activity event, there are different probability for each group of residents to get affected in sexually transmitted infection (STI), and in our case, Syphillis. The probability distributions are according to the literature review. $2$ interventions could be done during this phase, namely whether the parties involved use condom, or they notify their partner if have STI. Such intervention may decrease the chance of affection.
 	
-	In the program, simply run python main.py and the result will be a list of event that occurs in the simulated environment. We shall include a complete log file with statistics in our next checkpoint. 
+	Each sexual activity may result in sexually transmitted disease (STD) with our focus on Syphilis. We have two treatment option, whether to do antibiotics treatment, or just allow the patients to recover naturally. These two treatment options may affected the chance of recovery.
 	     
     \begin{table}[H]
 	\centering
     	\begin{tabular}{ |p{5cm}|p{7cm}| } 
     		\hline
     		Parameters & Description\\
+    		\hline
+    		\multicolumn{2}{|c|}{General} \\
     		\hline
     		logfile & logfile name\\
     		room\_cluster\_count & number of cluster\\
@@ -197,18 +201,119 @@ Simulation of the Spread of Syphilis within Group Housing for the Elderly
     		prob\_new\_single\_male & probability of a new single male\\
     		max\_age\_male\_resident & maximum age of male resident\\
     		max\_age\_female\_resident & maximum age of female resident\\
-    		std\_probability & probability of having STI\\
     		mean\_age\_new\_resident & the mean age of the new resident\\ 
     		sd\_age\_new\_resident & standard deviation of the age of new resident\\
     		max\_day\_room\_empty & maximum number the room is not occupied\\
+   			\hline
+   			\multicolumn{2}{|c|}{Infection risk} \\
+   			\hline
+   			HR & high risk probability\\
+   			LR & low risk probability\\
+   			std\_probability & all other group member not covered belong to here\\
+   			std\_with\_condom & probability with infection using condom\\
+   			std\_without\_condom & probability with infection without using condom\\
+   			\hline
+   			\multicolumn{2}{|c|}{Infection risk with casual partner} \\
+   			\hline
+   			casual\_std\_65\_79\_HR & probability of infection for high risk group with age 65 to 79\\
+   			casual\_std\_80\_95\_HR & probability of infection for high risk group with age 80 to 95\\
+   			casual\_std\_65\_79\_LR & probability of infection for low risk group with age 65 to 79\\
+   			casua\_std\_80\_95\_LR & probability of infection for low risk group with age 80 to 95\\
+    		\hline
+    		\multicolumn{2}{|c|}{Infection risk among couple} \\
+    		\hline
+    		casual\_std\_65\_79\_HR & probability of infection for high risk group with age 65 to 79\\
+    		casual\_std\_80\_95\_LR & probability of infection for low risk group with age 80 to 95\\
+    		\hline
+    		\multicolumn{2}{|c|}{Intervention method} \\
+    		\hline
+    		use\_condom & whether to promote using condom\\
+    		notify\_partner & whether to promote notify partner if get affected\\
+    		notification & change of notification\\
+    		condom\_casual\_partner & how likely to use condom among casual partners\\
+    		condom\_paired\_partner & how likely to use condom among couple\\
+    		\hline
+    		\multicolumn{2}{|c|}{Treatment method} \\
+    		\hline
+    		choice\_of\_treatment & choose between "antibiotics" or "natural recovery"\\
+    		woman\_nr & female probability of recovery when just using natural recovery\\
+    		man\_nr & male probability of recovery when just using natural recovery\\
+    		antibiotics & probability of recovery when using antibiotics\\
     		\hline
     	\end{tabular}
-    	\label{tab:parameter2}
+  
     	\caption{Description of parameters in the simulation}
+    	\label{tab:parameter2}
    \end{table}
 
 \section{Simulation result}
-- we will have a table. then discussion about the result
+While our model is flexible and could include more variable under testing, we wish to focus on our investigation on $2$ intervention and $2$ treatment condition.
+
+First we simulated situation where no intervention and no antibiotics treatment are provided. This is the worst scenario could be presented among the residents. 
+
+Secondly, we simulated situation where antibiotics treatment are provided, even without the intervention.
+
+Thirdly, we simulated situation where both intervention and antibiotics treatment are provided. This will be the ideal case in any elderly house.
+
+We run the simulation each for $30$ times and summarized as in Table \ref{tab:result} below.
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{ |p{7cm}|p{7cm}| } 
+		\hline
+		Parameters  & Number of residents\\ 
+		\hline
+		\multicolumn{2}{|c|}{Simulation Type $1$} \\
+		\multicolumn{2}{|c|}{Treatment involved : natural recovery} \\
+		\multicolumn{2}{|c|}{Intervention involved : use condom: no} \\
+		\multicolumn{2}{|c|}{Intervention involved : notification of partner: no} \\
+		\hline
+		Total male & 68\\
+		Total female & 75\\
+		Total couple & 53\\
+		Healthy male & 17\\
+		Healthy female & 25\\
+		Affected male: & 52\\
+		Affected female: & 51\\
+		Total male recovered & 1\\
+		Total female recovered & 1\\
+		\hline
+		\multicolumn{2}{|c|}{Simulation Type $2$} \\
+		\multicolumn{2}{|c|}{Treatment involved : antibiotics} \\
+		\multicolumn{2}{|c|}{Intervention involved : use condom: no} \\
+		\multicolumn{2}{|c|}{Intervention involved : notification of partner: no} \\
+		\hline
+		Total male & 61\\
+		Total female & 77\\
+		Total couple & 48\\
+		Healthy male & 61\\
+		Healthy female & 77\\
+		Affected male: & 48\\
+		Affected female: & 48\\
+		Total male recovered & 48\\
+		Total female recovered & 48\\		
+		\hline
+		\multicolumn{2}{|c|}{Simulation Type $3$} \\
+		\multicolumn{2}{|c|}{Treatment involved :antibiotics} \\
+		\multicolumn{2}{|c|}{Intervention involved : use condom: yes} \\
+		\multicolumn{2}{|c|}{Intervention involved : notification of partner: yes} \\
+		\hline
+		Total male & 58\\
+		Total female & 77\\
+		Total couple & 45\\
+		Healthy male & 58\\
+		Healthy female & 76\\
+		Affected male: & 26\\
+		Affected female: & 28\\
+		Total male recovered & 25\\
+		Total female recovered & 28\\
+		\hline
+	\end{tabular}
+	\caption{Result of simulation}
+	\label{tab:result}
+\end{table}
+
+From the result above, we could see without intervention and treatment, it is high vulnerable for the residents on the STI. Moreover, their recovery is really bad. This is shown in Simulation type $1$. When antibiotics was introduced, the recovery rate is very promising, as shown in Simulation type $2$. However, the antibiotics treatment may be expensive and most elderly housing has no financial capability to do so. In Simulation type $3$, we see both the recovery rate and the infection rate drop when both the intervention methods and antibiotics treatment are implemented. From the financial point of view, using intervention could help to release some of the financial burden from the administrative party for the elderly house. On the other hand, by always resorting to antibiotics treatment for the infected residents could help them to recover from the STI.
 
 \section{Verification and Validation}
 \subsection{Assumptions}
@@ -282,32 +387,27 @@ Furthermore, probability distribution of the parameters used in our model is sho
 		Paired & Weighted prevalence & 0.368
 		\\
 		\hline
-		
-		
-		
-		
-		
+			
 		% https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5477642/
 		
-		
 	\end{tabular}
-	\label{tab:parameter3}
+
 	\caption{Description of parameters governing testing, natural recovery and transmission probability}
+	\label{tab:parameter3}
 \end{table}
 
+\subsection{Verification}
+
+\subsection{Validation}
 What are the model used (cite all the paper)
 Compare with the result
 
-\subsection{Limitation of the model}
-Some of the limitatio of our model:
-Interaction of the factor could be more complicated .... etc (just briefly talk about it, then talk about improvement)
+\subsection{Future work}
+Our model is relatively simple model, due to our assumptions. For example, 
 
 \section{Conclusion}
-In this discrete event simulation event, we have successfully implement a simulation of the STD event in a housecare.
-%	\item Aiswarya Bhagavatula (GTID 903540374)
-%\item D. Aaron Hillegass (GTID 901988533)
-%\item Siawpeng Er (GTID 903413430)
-%\item Xiaotong Mu (GTID 903529807)
+In this discrete event simulation event, we have successfully implement a simulation of the STD event in an elderly house. While this is a relatively simple discrete event simulation, based on the result of  simulation, we could make sensible judgment on how to to prevent the STI in elderly house, and also the treatment options that could be carried out.
+
 
     \section{Division of Labor}
        \begin{center}
