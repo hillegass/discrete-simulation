@@ -3,6 +3,7 @@ import random
 import params
 import World
 import Room
+from Logger import Logger
 
 # Seed the random number generator
 random.seed(1)
@@ -11,10 +12,11 @@ random.seed(1)
 parameters = params.CreateParametersDictionary()
 
 # Open a log file that important events will go into
-logfile = open(parameters['logfilename'], 'w')
+#logfile = open(parameters['logfilename'], 'w')
 
 # Create the world
-world = World.World(parameters, logfile)
+myLogger = Logger(parameters['logfilename'])
+world = World.World(parameters, myLogger)
 Room.InitRoom(world)
 
 # Run for twelve years
@@ -23,5 +25,6 @@ while world.has_events() and world.day < 365 * 12:
 
 sys.stderr.write('Done\n')
 
+myLogger.printLog()
 # Explicitly close the log file
-logfile.close()
+#logfile.close()

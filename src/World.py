@@ -6,13 +6,13 @@ import utility
 
 class World:
 
-    def __init__(self, params, log):
+    def __init__(self, params, logger):
 
         # All the parameters for this execution of the simulation
         self.parameters = params
 
-        # A file to log important events to
-        self.log = log
+        # A logger to log important events to
+        self.logger = logger
 
         # The current day
         self.day = 0
