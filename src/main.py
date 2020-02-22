@@ -25,6 +25,6 @@ while world.has_events() and world.day < 365 * 12:
 
 sys.stderr.write('Done\n')
 
-myLogger.printLog()
+myLogger.printLog(world)
 # Explicitly close the log file
 #logfile.close()

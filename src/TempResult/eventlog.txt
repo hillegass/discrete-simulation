@@ -1,0 +1,16 @@
+Summary of the simulation
+----------------------------------------------
+Treatment involved: natural recovery
+Intervention involved: Use Condom: no
+
+Intervention involved: Notification of Partner: no
+
+Total Male: 68
+Total Female: 75
+Total Couple: 53
+Healthy male: 17
+Healthy Female: 25
+Affected Female: 51
+Affected Male: 52
+Total Female Recovered: 1
+Total Male Recovered: 1

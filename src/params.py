@@ -37,7 +37,11 @@ def CreateParametersDictionary():
 
     # treatment choice
     # natural or antibiotics
-    params['choice_of_treatment'] = 'antibiotics'
+    params['choice_of_treatment'] = 'natural recovery'
+    
+    # intervention:
+    params['use_condom'] = 'no'
+    params['notify_partner'] = 'no'
     
     # natural recovery
     # formula 1/(52*(1.13 + 0.5* Beta(4,4.496)))

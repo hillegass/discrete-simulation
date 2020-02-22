@@ -1,0 +1,16 @@
+Summary of the simulation
+----------------------------------------------
+Treatment involved: antibiotics
+Intervention involved: Use Condom: yes
+
+Intervention involved: Notification of Partner: yes
+
+Total Male: 58
+Total Female: 77
+Total Couple: 45
+Healthy male: 58
+Healthy Female: 76
+Affected Female: 26
+Affected Male: 28
+Total Female Recovered: 25
+Total Male Recovered: 28

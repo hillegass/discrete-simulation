@@ -124,7 +124,10 @@ class Person:
                 original_risk = 0.5
 
         # chance of using condom
-        using_condom_chance = np.random.uniform(0, 1)
+        if world.parameters['use_condom'] == 'yes':
+            using_condom_chance = 1
+        else:
+            using_condom_chance = 0
 
         # depend on room type
         if self.room.room_type == 0:  # single room

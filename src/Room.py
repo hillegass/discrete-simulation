@@ -16,8 +16,12 @@ class OccupyEvent (Event.Event):
         if self.room.id in world.rooms:
              # Does it go to a married couple?
             prob_new_room_for_married = world.parameters['prob_new_room_for_married']
-            world.logger.log("healthy", 1)
             if random.uniform(0, 1) < prob_new_room_for_married:
+                world.logger.logTotalMale(1)
+                world.logger.logTotalFemale(1)
+                world.logger.logTotalCouple(1)
+                world.logger.logMaleHealthy(1)
+                world.logger.logFemaleHealthy(1)
                 world.rooms[self.room.id].male += 1
                 world.rooms[self.room.id].female += 1
                 world.rooms[self.room.id].healthy += 2
@@ -44,8 +48,12 @@ class OccupyEvent (Event.Event):
                 is_male = random.uniform(
                     0, 1) < world.parameters['prob_new_single_male']
                 if is_male:
+                    world.logger.logMaleHealthy(1)
+                    world.logger.logTotalMale(1)
                     world.rooms[self.room.id].male += 1
                 else:
+                    world.logger.logFemaleHealthy(1)
+                    world.logger.logTotalFemale(1)
                     world.rooms[self.room.id].female += 1
                 world.rooms[self.room.id].healthy += 1
                 resident = Person.Person(is_male, self.room)
@@ -80,10 +88,10 @@ class TreatmentEvent (Event.Event):
         else:
             female_recovery_param = world.parameters['woman_nr']
             male_recovery_param = world.parameters['man_nr']
-            male_recovery_chance = 1/(52*(1.13+0.5*np.random.beta(
-                male_recovery_param[1], recovery_param[2])))
-            female_recovery_chance = 1/(52*(1.13+0.5*np.random.beta(
-                female_recovery_param[1], recovery_param[2])))
+            male_recovery_chance = 1/(male_recovery_param[0]*(male_recovery_param[1]+male_recovery_param[2]*np.random.beta(
+                male_recovery_param[4], male_recovery_param[5])))
+            female_recovery_chance = 1/(female_recovery_param[0]*(female_recovery_param[1]+female_recovery_param[2]*np.random.beta(
+                female_recovery_param[4], female_recovery_param[5])))
 
         femaleResident = world.rooms[self.room.id].femaleResidents
         maleResident = world.rooms[self.room.id].maleResidents
@@ -94,6 +102,8 @@ class TreatmentEvent (Event.Event):
             femaleAffected = femaleResident[i].is_infected
 
             if femaleAffected and chance_of_success <= female_recovery_chance:
+                world.logger.logFemaleRecovered(1)
+                world.logger.logFemaleHealthy(1)
                 world.rooms[self.room.id].healthy += 1
                 world.rooms[self.room.id].affected -= 1
                 femaleResident[i].is_infected = False
@@ -102,6 +112,8 @@ class TreatmentEvent (Event.Event):
             maleAffected = maleResident[i].is_infected
 
             if maleAffected and chance_of_success <= male_recovery_chance:
+                world.logger.logMaleRecovered(1)
+                world.logger.logMaleHealthy(1)
                 world.rooms[self.room.id].healthy += 1
                 world.rooms[self.room.id].affected -= 1
                 maleResident[i].is_infected = False
@@ -123,9 +135,12 @@ class SexualEvent (Event.Event):
         maleResident = world.rooms[self.room.id].maleResidents
         number_of_case = 0
 
-        notification_parameter = world.parameters['notification']
-        chance_of_notification = np.random.beta(
-            notification_parameter[1], notification_parameter[2])
+        if world.parameters['notify_partner'] == 'yes':
+            notification_parameter = world.parameters['notification']
+            chance_of_notification = np.random.beta(
+                notification_parameter[1], notification_parameter[2])
+        else:
+            chance_of_notification = 0
 
         for i in range(len(femaleResident)):
             femaleRisk = femaleResident[i].is_affected_probability(world)
@@ -136,6 +151,8 @@ class SexualEvent (Event.Event):
                 world.rooms[self.room.id].healthy -= 1
                 world.rooms[self.room.id].affected += 1
                 number_of_case += 1
+                world.logger.logFemaleAffected(1)
+                world.logger.logFemaleHealthy(-1)
 
                 # put in treatment
                 event = TreatmentEvent(
@@ -149,6 +166,9 @@ class SexualEvent (Event.Event):
                 maleResident[i].is_infected = True
                 world.rooms[self.room.id].healthy -= 1
                 world.rooms[self.room.id].affected += 1
+
+                world.logger.logMaleAffected(1)
+                world.logger.logMaleHealthy(-1)
                 number_of_case += 1
                 # put in treatment
                 event = TreatmentEvent(
