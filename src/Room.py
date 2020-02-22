@@ -16,7 +16,7 @@ class OccupyEvent (Event.Event):
         if self.room.id in world.rooms:
              # Does it go to a married couple?
             prob_new_room_for_married = world.parameters['prob_new_room_for_married']
-
+            world.logger.log("healthy", 1)
             if random.uniform(0, 1) < prob_new_room_for_married:
                 world.rooms[self.room.id].male += 1
                 world.rooms[self.room.id].female += 1
