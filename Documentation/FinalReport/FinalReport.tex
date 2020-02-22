@@ -211,7 +211,90 @@ Simulation of the Spread of Syphilis within Group Housing for the Elderly
 - we will have a table. then discussion about the result
 
 \section{Verification and Validation}
-What are the assumptions
+\subsection{Assumptions}
+\begin{itemize}
+	\item Only unprotected acts modeled in this analysis
+	\item No age mixing input preference
+	\item Partner notification is stratified by sex and age, however in the absence of data on changes in this prevention strategy, the parameters are kept time invariant
+	\item Only heterosexual partnerships.
+	\item Treatment ensued immediately following identification of infection, although this may not always happen in practice.
+\end{itemize}
+Furthermore, probability distribution of the parameters used in our model is shown in Table \ref{tab:parameter3}\\
+	\begin{table}[H]
+	\centering
+	\begin{tabular}{ |p{5cm}|p{7cm}|p{5cm}| } 
+		\hline
+		Parameter/Variable & Description & Distribution  \\ 
+		\hline
+		Population size & Population size for each age group & Uniformly distributed\\
+		Time step &	Time step implemented in the model & 	A day \\
+		High risk & Fraction of the population defined as high risk	& 10\% (Assumption) \\
+		Low risk & Fraction of the population defined as low risk & 90\% (Assumption)\\
+		\hline
+		\multicolumn{3}{|c|}{Testing symptomatic individuals} \\
+		\hline
+		Women &	Testing of symptomatic  women	& 1/(52*(0.079+0.072*Beta(4,4)))\\
+		Men	& Testing of symptomatic men	& 1/(52*(0.079+0.072*Beta(4,4)))\\
+		\hline
+		
+		\multicolumn{3}{|c|}{Casual partners} \\
+		\hline
+		High risk(HR)& Single, 65-79 HR	& Beta(3,60)\\
+		& Single, 80-95 HR	& Beta(3,400)\\
+		Low risk(LR)	 & Single, 65-79 LR	& Beta(1,160) \\
+		& Single, 80-95 LR	&Beta(1,160)\\
+		\hline
+		\multicolumn{3}{|c|}{Among paired} \\
+		\hline
+		High risk(HR)& Single, 65-79 HR	& Beta(10,70)\\
+		Low risk(LR) & Single, 80-95 LR	& Beta(10,100)\\
+		\hline
+		
+		\multicolumn{3}{|c|}{Transmission} \\
+		\hline
+		Transmission probability & Per act probability & Beta(5.5, 50)))\\
+		With condom protection & condom effect parameter estimate is 1.6 & Beta$(5.5,50)^{1.6}$\\
+		\hline
+		
+		\multicolumn{3}{|c|}{Natural recovery} \\
+		\hline
+		Women & & 1/(52*(1.13+0.5*Beta(4,4.969)))\\
+		Men & & 1/(52*(1.13+0.5*Beta(4,4.969)))\\
+		
+		\hline
+		
+		\multicolumn{3}{|c|}{Treatment Success} \\
+		\hline
+		Efficiency of antibiotics & & Beta(190,8)))\\
+		\hline
+		
+		\multicolumn{3}{|c|}{Partner Notification} \\
+		\hline
+		Women&Age65-79&Beta(4,3)\\
+		&Age80-95&Beta(4,3)
+		\\
+		Men&Age65-79&Beta(4,3)\\
+		&Age80-95&Beta(4,3)\\
+		\hline
+		\multicolumn{3}{|c|}{Condom Use} \\
+		\hline
+		Casual partners&Weighted prevalence & 0.131\\
+		Paired & Weighted prevalence & 0.368
+		\\
+		\hline
+		
+		
+		
+		
+		
+		% https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5477642/
+		
+		
+	\end{tabular}
+	\label{tab:parameter3}
+	\caption{Description of parameters governing testing, natural recovery and transmission probability}
+\end{table}
+
 What are the model used (cite all the paper)
 Compare with the result
 
