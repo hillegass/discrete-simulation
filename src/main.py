@@ -11,12 +11,13 @@ parameters = params.CreateParametersDictionary()
 # Create a log file
 myLogger = Logger(parameters['logfilename'])
 
+
 # Create CSV for summary
 csvfile = open(parameters['csvfilename'], 'w')
-myLogger.writeCSVHeader(csvfile)
+myLogger.writeCSVHeader(csvfile, parameters)
 
 # Loop for multiple runs of the simulation
-for i in range(2000):
+for i in range(parameters['simulation_repetition']):
     # Clear the logger's cache
     myLogger.clear()
 
@@ -27,6 +28,7 @@ for i in range(2000):
     world = World.World(parameters, myLogger)
     Room.InitRoom(world)
 
+    
     # Run for twelve years
     while world.has_events() and world.day < 365 * 12:
         world.process()
@@ -35,6 +37,6 @@ for i in range(2000):
 
 sys.stderr.write('Done.\n')
 
-myLogger.printLog(world)
+#myLogger.printLog(world)
 # Explicitly close the log file
 csvfile.close()

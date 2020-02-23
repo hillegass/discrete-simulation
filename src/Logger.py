@@ -64,7 +64,12 @@ class Logger():
             else:
                 csvfile.write('\n')
 
-    def writeCSVHeader(self,csvfile):
+    def writeCSVHeader(self, csvfile, parameters):
+        csvfile.write("Summary of the simulation\n")
+        csvfile.write("----------------------------------------------\n")
+        csvfile.write("Treatment involved: {}\n".format(parameters['choice_of_treatment']))
+        csvfile.write("Intervention involved: Use Condom: {}\n".format(parameters['use_condom']))
+        csvfile.write("Intervention involved: Notification of Partner: {}\n\n".format(parameters['notify_partner']))
         for i in range(len(self.keys)):
             key = self.keys[i]
             csvfile.write("{}".format(key))

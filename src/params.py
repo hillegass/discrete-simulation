@@ -12,7 +12,8 @@ def CreateParametersDictionary():
     params['mean_age_new_resident'] = 365 * 72
     params['sd_age_new_resident'] = 365 * 7
     params['max_days_room_empty'] = 90
-    
+    params['simulation_repetition'] = 10
+
     # std param
     # fraction of the population defined as high risk, we could easily use only high risk (HR) probability, then low risk (LR) is just 1 - HR
     params['HR'] = 0.1
