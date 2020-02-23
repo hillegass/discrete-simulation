@@ -5,7 +5,7 @@ class Logger():
     def __init__(self, logfile):
         self.logfile = logfile
         self.keys = ['Healthy male', 'Healthy Female', 'Affected Male','Affected Female', 'Total Male', 'Total Female', 'Total Couple', 'Total Male Recovered', 'Total Female Recovered']
-        self.mydict = {}
+        self.mydict = {'Healthy male':0, 'Healthy Female':0, 'Affected Male':0,'Affected Female':0, 'Total Male':0, 'Total Female':0, 'Total Couple':0, 'Total Male Recovered':0, 'Total Female Recovered':0}
     
     def log(self, my_item, my_value):
         if my_item not in self.mydict:
@@ -14,8 +14,7 @@ class Logger():
             self.mydict[my_item] += my_value
 
     def clear(self):
-        self.mydict = {}
-
+        self.mydict = {'Healthy male':0, 'Healthy Female':0, 'Affected Male':0,'Affected Female':0, 'Total Male':0, 'Total Female':0, 'Total Couple':0, 'Total Male Recovered':0, 'Total Female Recovered':0}
     
 
     def logMaleHealthy(self, value):
