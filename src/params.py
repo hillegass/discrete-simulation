@@ -1,7 +1,7 @@
 # Try to put all the assumptions in this file
 def CreateParametersDictionary():
     params = {}
-    params['logfilename'] = 'eventlog.txt'
+    params['logfilename'] = 'simulationDetail.txt'
     params['csvfilename'] = 'output.csv'
     params['room_cluster_count'] = 3
     params['room_per_cluster_count'] = 30

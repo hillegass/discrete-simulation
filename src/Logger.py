@@ -44,15 +44,16 @@ class Logger():
     def logFemaleRecovered(self, value):
         self.log('Total Female Recovered', value)
 
-    def printLog(self, world):
+    def printSimulationDetail(self, world):
         with open(self.logfile, 'w') as f:
             f.write("Summary of the simulation\n")
             f.write("----------------------------------------------\n")
             f.write("Treatment involved: {}\n".format(world.parameters['choice_of_treatment']))
             f.write("Intervention involved: Use Condom: {}\n".format(world.parameters['use_condom']))
             f.write("Intervention involved: Notification of Partner: {}\n\n".format(world.parameters['notify_partner']))
-            for key, value in self.mydict.items():
-                f.write("{}: {}\n".format(key, value))
+            f.write("Number of simulation: {}\n\n".format(world.parameters['simulation_repetition']))
+#            for key, value in self.mydict.items():
+#                f.write("{}: {}\n".format(key, value))
         
     def appendToCSV(self, csvfile):
         for i in range(len(self.keys)):
@@ -65,11 +66,11 @@ class Logger():
                 csvfile.write('\n')
 
     def writeCSVHeader(self, csvfile, parameters):
-        csvfile.write("Summary of the simulation\n")
-        csvfile.write("----------------------------------------------\n")
-        csvfile.write("Treatment involved: {}\n".format(parameters['choice_of_treatment']))
-        csvfile.write("Intervention involved: Use Condom: {}\n".format(parameters['use_condom']))
-        csvfile.write("Intervention involved: Notification of Partner: {}\n\n".format(parameters['notify_partner']))
+#        csvfile.write("Summary of the simulation\n")
+#        csvfile.write("----------------------------------------------\n")
+#        csvfile.write("Treatment involved: {}\n".format(parameters['choice_of_treatment']))
+#        csvfile.write("Intervention involved: Use Condom: {}\n".format(parameters['use_condom']))
+#        csvfile.write("Intervention involved: Notification of Partner: {}\n\n".format(parameters['notify_partner']))
         for i in range(len(self.keys)):
             key = self.keys[i]
             csvfile.write("{}".format(key))

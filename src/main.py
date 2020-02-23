@@ -37,6 +37,6 @@ for i in range(parameters['simulation_repetition']):
 
 sys.stderr.write('Done.\n')
 
-#myLogger.printLog(world)
+myLogger.printSimulationDetail(world)
 # Explicitly close the log file
 csvfile.close()
