@@ -16,7 +16,7 @@ csvfile = open(parameters['csvfilename'], 'w')
 myLogger.writeCSVHeader(csvfile)
 
 # Loop for multiple runs of the simulation
-for i in range(100):
+for i in range(2000):
     # Clear the logger's cache
     myLogger.clear()
 
