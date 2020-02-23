@@ -5,26 +5,36 @@ import World
 import Room
 from Logger import Logger
 
-# Seed the random number generator
-random.seed(1)
-
-# Get the parameters for this run of the simulation
+# Get the parameters for the simulation
 parameters = params.CreateParametersDictionary()
 
-# Open a log file that important events will go into
-#logfile = open(parameters['logfilename'], 'w')
-
-# Create the world
+# Create a log file
 myLogger = Logger(parameters['logfilename'])
-world = World.World(parameters, myLogger)
-Room.InitRoom(world)
 
-# Run for twelve years
-while world.has_events() and world.day < 365 * 12:
-    world.process()
+# Create CSV for summary
+csvfile = open(parameters['csvfilename'], 'w')
+myLogger.writeCSVHeader(csvfile)
 
-sys.stderr.write('Done\n')
+# Loop for multiple runs of the simulation
+for i in range(100):
+    # Clear the logger's cache
+    myLogger.clear()
+
+    # Seed the random number generator
+    random.seed(i)
+
+    # Create the world
+    world = World.World(parameters, myLogger)
+    Room.InitRoom(world)
+
+    # Run for twelve years
+    while world.has_events() and world.day < 365 * 12:
+        world.process()
+
+    myLogger.appendToCSV(csvfile)
+
+sys.stderr.write('Done.\n')
 
 myLogger.printLog(world)
 # Explicitly close the log file
-#logfile.close()
+csvfile.close()

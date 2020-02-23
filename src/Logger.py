@@ -4,6 +4,7 @@ import os
 class Logger():
     def __init__(self, logfile):
         self.logfile = logfile
+        self.keys = ['Healthy male', 'Healthy Female', 'Affected Male','Affected Female', 'Total Male', 'Total Female', 'Total Couple', 'Total Male Recovered', 'Total Female Recovered']
         self.mydict = {}
     
     def log(self, my_item, my_value):
@@ -11,6 +12,11 @@ class Logger():
             self.mydict[my_item] = my_value
         else:
             self.mydict[my_item] += my_value
+
+    def clear(self):
+        self.mydict = {}
+
+    
 
     def logMaleHealthy(self, value):
         self.log('Healthy male' , value)
@@ -48,4 +54,24 @@ class Logger():
             f.write("Intervention involved: Notification of Partner: {}\n\n".format(world.parameters['notify_partner']))
             for key, value in self.mydict.items():
                 f.write("{}: {}\n".format(key, value))
+        
+    def appendToCSV(self, csvfile):
+        for i in range(len(self.keys)):
+            key = self.keys[i]
+            if key in self.mydict:
+                csvfile.write("{}".format(self.mydict[key]))
+            if i < len(self.keys) - 1:
+                csvfile.write(',')
+            else:
+                csvfile.write('\n')
+
+    def writeCSVHeader(self,csvfile):
+        for i in range(len(self.keys)):
+            key = self.keys[i]
+            csvfile.write("{}".format(key))
+            if i < len(self.keys) - 1:
+                csvfile.write(',')
+            else:
+                csvfile.write('\n')
+
 

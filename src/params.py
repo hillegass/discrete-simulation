@@ -2,6 +2,7 @@
 def CreateParametersDictionary():
     params = {}
     params['logfilename'] = 'eventlog.txt'
+    params['csvfilename'] = 'output.csv'
     params['room_cluster_count'] = 3
     params['room_per_cluster_count'] = 30
     params['prob_new_room_for_married'] = 0.5
