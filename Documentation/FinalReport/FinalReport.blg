@@ -4,46 +4,46 @@ The top-level auxiliary file: FinalReport.aux
 The style file: plain.bst
 Database file #1: reference.bib
 Warning--entry type for "dataset" isn't style-file defined
---line 145 of file reference.bib
-You've used 13 entries,
+--line 223 of file reference.bib
+You've used 15 entries,
             2118 wiz_defined-function locations,
-            589 strings with 7298 characters,
-and the built_in function-call counts, 5131 in all, are:
-= -- 462
-> -- 337
-< -- 0
-+ -- 138
-- -- 120
-* -- 457
-:= -- 891
-add.period$ -- 38
-call.type$ -- 13
-change.case$ -- 99
+            600 strings with 7915 characters,
+and the built_in function-call counts, 6208 in all, are:
+= -- 559
+> -- 423
+< -- 1
++ -- 172
+- -- 152
+* -- 547
+:= -- 1071
+add.period$ -- 44
+call.type$ -- 15
+change.case$ -- 121
 chr.to.int$ -- 0
-cite$ -- 13
-duplicate$ -- 135
-empty$ -- 343
-format.name$ -- 120
-if$ -- 1003
+cite$ -- 15
+duplicate$ -- 170
+empty$ -- 396
+format.name$ -- 152
+if$ -- 1221
 int.to.chr$ -- 0
-int.to.str$ -- 13
-missing$ -- 11
-newline$ -- 67
-num.names$ -- 26
-pop$ -- 87
+int.to.str$ -- 15
+missing$ -- 13
+newline$ -- 77
+num.names$ -- 30
+pop$ -- 108
 preamble$ -- 1
-purify$ -- 86
+purify$ -- 106
 quote$ -- 0
-skip$ -- 94
+skip$ -- 125
 stack$ -- 0
-substring$ -- 316
-swap$ -- 13
-text.length$ -- 0
+substring$ -- 359
+swap$ -- 28
+text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 52
+type$ -- 60
 warning$ -- 0
-while$ -- 40
-width$ -- 15
-write$ -- 141
+while$ -- 46
+width$ -- 17
+write$ -- 163
 (There was 1 warning)
