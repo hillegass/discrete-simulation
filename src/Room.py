@@ -130,7 +130,7 @@ class SexualEvent (Event.Event):
         self.room = room
 
     def execute(self, world):
-        chance = random.uniform(0, 1)
+        chance = 0.1
         femaleResident = world.rooms[self.room.id].femaleResidents
         maleResident = world.rooms[self.room.id].maleResidents
         number_of_case = 0
@@ -146,7 +146,7 @@ class SexualEvent (Event.Event):
             femaleRisk = femaleResident[i].is_affected_probability(world)
             # notified by partner, so not doing sexual event
             notificationByPartner = random.uniform(0, 1)
-            if chance > femaleRisk and notificationByPartner > chance_of_notification:
+            if chance < femaleRisk and notificationByPartner > chance_of_notification:
                 femaleResident[i].is_infected = True
                 world.rooms[self.room.id].healthy -= 1
                 world.rooms[self.room.id].affected += 1
@@ -162,7 +162,7 @@ class SexualEvent (Event.Event):
         for i in range(len(maleResident)):
             notificationByPartner = random.uniform(0, 1)
             maleRisk = maleResident[i].is_affected_probability(world)
-            if chance > maleRisk and notificationByPartner > chance_of_notification:
+            if chance < maleRisk and notificationByPartner > chance_of_notification:
                 maleResident[i].is_infected = True
                 world.rooms[self.room.id].healthy -= 1
                 world.rooms[self.room.id].affected += 1

@@ -102,13 +102,9 @@ class Person:
 
     # get the probability of affecting
     def is_affected_probability(self, world):
-        # get the probability of getting the disease
-        std_risk_with_condom = world.parameters['std_with_condom']
-        prob_with_condom = np.random.beta(
-            std_risk_with_condom[1], std_risk_with_condom[2])**1.6
-        std_risk_without_condom = world.parameters['std_without_condom']
-        prob_without_condom = np.random.beta(
-            std_risk_without_condom[1], std_risk_without_condom[2])
+        # get the reduction of getting the disease based on condom usage
+        prob_with_condom = world.parameters['std_with_condom']
+        prob_without_condom = world.parameters['std_without_condom']
 
         # original risk without the condom condition
         original_risk = 0
@@ -132,11 +128,19 @@ class Person:
         # depend on room type
         if self.room.room_type == 0:  # single room
             if using_condom_chance > world.parameters['condom_casual_partner']:
+                print("Use Single room With condom: ", original_risk * prob_with_condom)
+                print("Compare Single room Without condom: ", original_risk * prob_without_condom)
                 return original_risk * prob_with_condom
             else:
+                print("Use Single room Without condom: ", original_risk * prob_without_condom)
+                print("Compare Single room With condom: ", original_risk * prob_with_condom)
                 return original_risk * prob_without_condom
         else:  # couple room
             if using_condom_chance > world.parameters['condom_paired_partner']:
+                print("Use Couple room With condom: ", original_risk * prob_with_condom)
+                print("Compare Couple room Without condom: ", original_risk * prob_without_condom)
                 return original_risk * prob_with_condom
             else:
+                print("Use Couple room Without condom: ", original_risk * prob_without_condom)
+                print("Compare Couple room With condom: ", original_risk * prob_with_condom)
                 return original_risk * prob_without_condom

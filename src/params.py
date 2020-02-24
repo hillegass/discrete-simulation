@@ -12,15 +12,15 @@ def CreateParametersDictionary():
     params['mean_age_new_resident'] = 365 * 72
     params['sd_age_new_resident'] = 365 * 7
     params['max_days_room_empty'] = 90
-    params['simulation_repetition'] = 10
+    params['simulation_repetition'] = 1
 
     # std param
     # fraction of the population defined as high risk, we could easily use only high risk (HR) probability, then low risk (LR) is just 1 - HR
     params['HR'] = 0.1
     params['LR'] = 0.9
     params['std_probability'] = [0.5]
-    params['std_with_condom'] = ['beta', 5.5, 50, 1.6]
-    params['std_without_condom'] = ['beta', 5.5, 50]
+    params['std_with_condom'] = 0.5
+    params['std_without_condom'] = 1
 
     # casual partners
     params['casual_std_65_79_HR'] = ['beta', 3, 60 ]
@@ -39,7 +39,7 @@ def CreateParametersDictionary():
 
     # treatment choice
     # natural or antibiotics
-    params['choice_of_treatment'] = 'natural recovery'
+    params['choice_of_treatment'] = 'antibiotics'
     
     # intervention:
     params['use_condom'] = 'no'
