@@ -371,7 +371,6 @@ When antibiotics was introduced, the recovery rate is very promising, as shown i
 \section{Verification and Validation}
 \subsection{Assumptions}
 \begin{itemize}
-	\item Only unprotected acts modeled in this analysis
 	\item No age mixing input preference
 	\item Partner notification is stratified by sex and age, however in the absence of data on changes in this prevention strategy, the parameters are kept time invariant
 	\item Only heterosexual partnerships.
@@ -459,8 +458,68 @@ Once infected with the STI, they may be treated. The treatment may be antibiotic
 In our simulation model, the model was done according to the conceptual model according to the flow chart as described above. Moreover, for repeatability, we set our seed according to the number of the simulation we are currently run. The result are recorded in CSV file for checking of our assumptions and our conceptual model. 
 
 \subsection{Validation}
-What are the model used (cite all the paper)
-Compare with the result
+\textbf{Comparison to other model:}\\
+
+To explore the impact of partner notification and condom effectiveness on sexually disease transmission. we calibrated the model under 4 discrete scenarios, For quantification of the overall impact, we ran 30 replications for each scenario, and compute the average for each. the first scenario analysis assumed that there was no condom or partner notification ; the second scenario assumed that there was no partner notification for the time period; the third scenario analysis assumed that there was no condom used; The fourth scenario included both interventions.\\
+
+
+\begin{figure}[H]
+\caption{Estimated Impact of Using condom and partner notification}\\
+\centering
+\includegraphics[width=0.6\textwidth]{plt1.png}
+\label{fig:plt1}
+\end{figure}
+
+\begin{figure}[H]
+\caption{Estimated Impact of Using condom and partner notification}\\
+\centering
+\includegraphics[width=0.58\textwidth]{plt3.png}
+\label{fig:plt4}
+\end{figure}
+
+
+\begin{figure}[H]
+\caption{Estimated Impact of Using condom and partner notification}\\
+\includegraphics[width=0.83\textwidth]{plt2.png}
+\label{fig:plt2}
+\end{figure}
+
+
+ For the same time period, national prevalence estimates from the National Health and Nutrition Examination Survey lacked a clear trend, and the estimates were characterized by wide confidence intervals in Figure 3. The high variability does not effect our simulation model, because all the variables are randomly generated with fix distribution. 
+ In our simulation model, instead of exploring the impact of uncertainty regarding trends in screening and reporting, we would like to learn more about the effect of condom use on sexual disease transmission. Because part of the reason these bacterial sexually transmitted infections are so common is that they are really contagious.
+ How ever the efficacy of condoms for protection against transmission has not previously measured on a per act basis, because the measured correct use and condom use problems could introduce bias resulting in condom effectiveness similar to that produced by combining consistent and inconsistent users.
+ We examined the efficacy of condom use in prevention simplex virus type 2(HSV-2)transmission. By comparing the number of transmissions per 1000 unprotected acts and protected acts, the condom use reduced the per-act probability of transmission by 65\%, to avoid overestimating the effectiveness of condom use, we used 50\% * original transmission prob if condom used. \\
+ 
+
+ 
+ As we can see from Figure 2, each of the 4 scenarios produced joint posterior estimates of the model consistent with the observed epidemiologic data[Figure 3]. Absence of both using condom and partner notification had the largest impact on estimated prevalence for both sex. The modeling results suggested that the greatest impact in STD prevention has come from combining condom use with partner notification.\\
+ 
+\textbf{Degenerate Tests and Sensitivity Analysis:}\\
+
+Untreated patients with STD infection can contribute to continued disease transmission in the community. For many types of sexually transmitted infections (STDs) patients should administer appropriate therapy to prevent this transmission. \\
+
+ Treatment is critical, it is a rate-limiting. As shown in Figure 5, with treatment, there is a huge improvement in the number of recovered patients. Furthermore, It has the highest impact on the first scenario which has no condom use and partner notification. In the first scenario, patients have a higher probability of acquiring STD from and infected source, thus the number of people recovered are greater.  Our review leads to the recommendation that if the patient is infected, the partner(s) should be treated as well to prevent reinfection and further spread of the disease.
+ 
+\begin{figure}[H]
+\caption{Effect of Treatment in Different Scenario}\\
+\includegraphics[width=0.8\textwidth]{plt4.png}
+\centering
+\label{fig:plt4}
+\end{figure}
+
+
+\textbf{Extreme Condition Tests:}\\
+
+To further validate our model, we look at the model structure and outputs for extreme and unlikely combination of levels of factors in the system. Assume no treatment ad partner notification,we ran our simulation model with different probability of getting infected when condoms are used. As we can observe in Figure 6, when condoms have perfect efficacy for protection against STDs, no people get infected. as the efficacy decreases, the number of infected patients increases, and eventually it converges to the number of infected patients in the scenario without condom use.\\ 
+
+Condoms are recommended as an effective preventive method for heterosexual transmission. However, the exact magnitude of risk reduction is difficult to quantify because of limitations and variations in the methods and design of these studies. The 2 largest issues remain how best to measure condom use and how best to identify study populations with documented exposure to infection. 
+
+\begin{figure}[H]
+\caption{Effect of Condom Use on Infected Total }\\
+\includegraphics[width=0.8\textwidth]{plt5.png}
+\centering
+\label{fig:plt4}
+\end{figure}
 
 \subsection{Future work}
 Our model in this project is relatively simple. While it fit our purpose of simulation, we could further improve it in future work.
