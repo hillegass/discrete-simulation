@@ -91,7 +91,9 @@ Simulation of the Spread of Syphilis within Group Housing for the Elderly
     \item Types of sexual activity that they engage in (if possible)
    	\end{itemize}     
    	
-   	As an updated, we also successfully obtained the real data about syphilis directly from the CDC through some connections.
+ We successfully obtained the real data about syphilis directly from the CDC through some connections.
+ 
+ From the data obtained, we cross checked with some literature review and come out with the distribution as Table \ref{tab:parameter}. Furthermore, from the population, we obtain the mean and the standard deviation on the age and the gender. By doing this, when we randomly generate the residents for our simulation, it will be closer to the data obtained. Since this is relatively easy probability (ratio of the gender, age), we do not found any abnormalities in the generated data.
    	
    	\section{Methodology}
    	Our simulation will first simulate a population of people entering and exiting a single retirement community. It will use stochastic methods to give them an initial age, gender, and infection status.  It will also remove these people as move somewhere else or die. When someone dies or moves away, this creates room for a new resident.
@@ -464,14 +466,14 @@ To explore the impact of partner notification and condom effectiveness on sexual
 
 
 \begin{figure}[H]
-\caption{Estimated Impact of Using condom and partner notification}\\
+\caption{Estimated Impact of Using condom and partner notification}
 \centering
 \includegraphics[width=0.6\textwidth]{plt1.png}
 \label{fig:plt1}
 \end{figure}
 
 \begin{figure}[H]
-\caption{Estimated Impact of Using condom and partner notification}\\
+\caption{Estimated Impact of Using condom and partner notification}
 \centering
 \includegraphics[width=0.58\textwidth]{plt3.png}
 \label{fig:plt4}
@@ -479,7 +481,7 @@ To explore the impact of partner notification and condom effectiveness on sexual
 
 
 \begin{figure}[H]
-\caption{Estimated Impact of Using condom and partner notification}\\
+\caption{Estimated Impact of Using condom and partner notification}
 \includegraphics[width=0.83\textwidth]{plt2.png}
 \label{fig:plt2}
 \end{figure}
@@ -501,7 +503,7 @@ Untreated patients with STD infection can contribute to continued disease transm
  Treatment is critical, it is a rate-limiting. As shown in Figure 5, with treatment, there is a huge improvement in the number of recovered patients. Furthermore, It has the highest impact on the first scenario which has no condom use and partner notification. In the first scenario, patients have a higher probability of acquiring STD from and infected source, thus the number of people recovered are greater.  Our review leads to the recommendation that if the patient is infected, the partner(s) should be treated as well to prevent reinfection and further spread of the disease.
  
 \begin{figure}[H]
-\caption{Effect of Treatment in Different Scenario}\\
+\caption{Effect of Treatment in Different Scenario}
 \includegraphics[width=0.8\textwidth]{plt4.png}
 \centering
 \label{fig:plt4}
@@ -515,7 +517,7 @@ To further validate our model, we look at the model structure and outputs for ex
 Condoms are recommended as an effective preventive method for heterosexual transmission. However, the exact magnitude of risk reduction is difficult to quantify because of limitations and variations in the methods and design of these studies. The 2 largest issues remain how best to measure condom use and how best to identify study populations with documented exposure to infection. 
 
 \begin{figure}[H]
-\caption{Effect of Condom Use on Infected Total }\\
+\caption{Effect of Condom Use on Infected Total }
 \includegraphics[width=0.8\textwidth]{plt5.png}
 \centering
 \label{fig:plt4}
