@@ -128,19 +128,19 @@ class Person:
         # depend on room type
         if self.room.room_type == 0:  # single room
             if using_condom_chance > world.parameters['condom_casual_partner']:
-                print("Use Single room With condom: ", original_risk * prob_with_condom)
-                print("Compare Single room Without condom: ", original_risk * prob_without_condom)
+                #print("Use Single room With condom: ", original_risk * prob_with_condom)
+                #print("Compare Single room Without condom: ", original_risk * prob_without_condom)
                 return original_risk * prob_with_condom
             else:
-                print("Use Single room Without condom: ", original_risk * prob_without_condom)
-                print("Compare Single room With condom: ", original_risk * prob_with_condom)
+                #print("Use Single room Without condom: ", original_risk * prob_without_condom)
+                #print("Compare Single room With condom: ", original_risk * prob_with_condom)
                 return original_risk * prob_without_condom
         else:  # couple room
             if using_condom_chance > world.parameters['condom_paired_partner']:
-                print("Use Couple room With condom: ", original_risk * prob_with_condom)
-                print("Compare Couple room Without condom: ", original_risk * prob_without_condom)
+                #print("Use Couple room With condom: ", original_risk * prob_with_condom)
+                #print("Compare Couple room Without condom: ", original_risk * prob_without_condom)
                 return original_risk * prob_with_condom
             else:
-                print("Use Couple room Without condom: ", original_risk * prob_without_condom)
-                print("Compare Couple room With condom: ", original_risk * prob_with_condom)
+                #print("Use Couple room Without condom: ", original_risk * prob_without_condom)
+                #print("Compare Couple room With condom: ", original_risk * prob_with_condom)
                 return original_risk * prob_without_condom
