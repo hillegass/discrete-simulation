@@ -4,6 +4,7 @@
 \usepackage[margin=0.75in]{geometry}
 \usepackage{float}
 \usepackage{graphicx}
+\usepackage{longtable}
 
 \setlength{\parskip}{0.7em}
 \setlength{\parindent}{0em}
@@ -247,19 +248,23 @@ Simulation of the Spread of Syphilis within Group Housing for the Elderly
    \end{table}
 
 \section{Simulation result}
-While our model is flexible and could include more variable under testing, we wish to focus on our investigation on $2$ intervention and $2$ treatment condition.
+While our model is flexible and could include more variable under testing, we wish to focus on our investigation on $2$ intervention and $2$ treatment condition. Our intervention include: $1.$ Using condom, $2.$ Notify partner whenever you might have STI. For our treatment, it is either $1.$ antibiotics or $2.$ natural recovery, equivalent to no treatment.
 
-First we simulated situation where no intervention and no antibiotics treatment are provided. This is the worst scenario could be presented among the residents. 
+Different scenarios of simulation was run as per below:
 
-Secondly, we simulated situation where antibiotics treatment are provided, even without the intervention.
+	\begin{enumerate}
+		\item Natural recovery, not using condom, not notify partner
+		\item Natural recovery, using condom, not notify partner
+		\item Natural recovery, not using condom, notify partner
+		\item  Natural recovery, using condom, notify partner
+		\item Antibiotics, not using condom, not notify partner
+		\item  Antibiotics, using condom, notify partner
+	\end{enumerate}
 
-Thirdly, we simulated situation where both intervention and antibiotics treatment are provided. This will be the ideal case in any elderly house.
 
 We run the simulation each for $30$ times and summarized as in Table \ref{tab:result} below.
 
-\begin{table}[H]
-	\centering
-	\begin{tabular}{ |p{7cm}|p{7cm}| } 
+\begin{longtable}{|p{7cm}|p{7cm}|}
 		\hline
 		Parameters  & Number of residents\\ 
 		\hline
@@ -268,52 +273,100 @@ We run the simulation each for $30$ times and summarized as in Table \ref{tab:re
 		\multicolumn{2}{|c|}{Intervention involved : use condom: no} \\
 		\multicolumn{2}{|c|}{Intervention involved : notification of partner: no} \\
 		\hline
-		Total male & 68\\
-		Total female & 75\\
-		Total couple & 53\\
-		Healthy male & 17\\
-		Healthy female & 25\\
-		Affected male: & 52\\
-		Affected female: & 51\\
-		Total male recovered & 1\\
-		Total female recovered & 1\\
+		Total male & 58.33\\
+		Total female & 77.47\\
+		Total couple & 46.30\\
+		Healthy male & 25.87\\
+		Healthy female & 44.53\\
+		Infected male: & 33.63\\
+		Infected female: & 33.67\\
+		Total male recovered & 0.67\\
+		Total female recovered & 0.73\\
 		\hline
 		\multicolumn{2}{|c|}{Simulation Type $2$} \\
+		\multicolumn{2}{|c|}{Treatment involved : natural recovery} \\
+		\multicolumn{2}{|c|}{Intervention involved : use condom: yes} \\
+		\multicolumn{2}{|c|}{Intervention involved : notification of partner: no} \\
+		\hline
+		Total male & 59.77\\
+		Total female & 76.67\\
+		Total couple & 46.43\\
+		Healthy male & 51.90\\
+		Healthy female & 66.86\\
+		Infected male: & 8.16\\
+		Infected female: & 10.13\\
+		Total male recovered & 0.30\\
+		Total female recovered & 0.33\\	
+		\hline
+		\multicolumn{2}{|c|}{Simulation Type $3$} \\
+		\multicolumn{2}{|c|}{Treatment involved : natural recovery} \\
+		\multicolumn{2}{|c|}{Intervention involved : use condom: no} \\
+		\multicolumn{2}{|c|}{Intervention involved : notification of partner: yes} \\
+		\hline
+		Total male & 58.63\\
+		Total female & 76.70\\
+		Total couple & 45.33\\
+		Healthy male & 44.13\\
+		Healthy female & 63.03\\
+		Infected male: & 14.70\\
+		Infected female: & 13.93\\
+		Total male recovered & 0.20\\
+		Total female recovered & 0.37\\		
+		\hline
+		\multicolumn{2}{|c|}{Simulation Type $4$} \\
+		\multicolumn{2}{|c|}{Treatment involved : natural recovery} \\
+		\multicolumn{2}{|c|}{Intervention involved : use condom: yes} \\
+		\multicolumn{2}{|c|}{Intervention involved : notification of partner: yes} \\
+		\hline
+		Total male & 60.50\\
+		Total female & 75.40\\
+		Total couple & 45.90\\
+		Healthy male & 57.50\\
+		Healthy female & 71.76\\
+		Infected male: & 3.17\\
+		Infected female: & 3.67\\
+		Total male recovered & 0.17\\
+		Total female recovered & 0.03\\		
+		\hline
+		\multicolumn{2}{|c|}{Simulation Type $5$} \\
 		\multicolumn{2}{|c|}{Treatment involved : antibiotics} \\
 		\multicolumn{2}{|c|}{Intervention involved : use condom: no} \\
 		\multicolumn{2}{|c|}{Intervention involved : notification of partner: no} \\
 		\hline
-		Total male & 61\\
-		Total female & 77\\
-		Total couple & 48\\
-		Healthy male & 61\\
-		Healthy female & 77\\
-		Affected male: & 48\\
-		Affected female: & 48\\
-		Total male recovered & 48\\
-		Total female recovered & 48\\		
+		Total male & 59.23\\
+		Total female & 77.07\\
+		Total couple & 46.30\\
+		Healthy male & 58.90\\
+		Healthy female & 76.73\\
+		Infected  male: & 34.00\\
+		Infected female: & 33.67\\
+		Total male recovered & 33.67\\
+		Total female recovered & 33.33\\		
 		\hline
-		\multicolumn{2}{|c|}{Simulation Type $3$} \\
+		\multicolumn{2}{|c|}{Simulation Type $6$} \\
 		\multicolumn{2}{|c|}{Treatment involved :antibiotics} \\
 		\multicolumn{2}{|c|}{Intervention involved : use condom: yes} \\
 		\multicolumn{2}{|c|}{Intervention involved : notification of partner: yes} \\
 		\hline
-		Total male & 58\\
-		Total female & 77\\
-		Total couple & 45\\
-		Healthy male & 58\\
-		Healthy female & 76\\
-		Affected male: & 26\\
-		Affected female: & 28\\
-		Total male recovered & 25\\
-		Total female recovered & 28\\
+		Total male & 60.63\\
+		Total female & 76.03\\
+		Total couple & 46.67\\
+		Healthy male & 60.53\\
+		Healthy female & 75.83\\
+		Infected male: & 3.20\\
+		Infected female: & 4.13\\
+		Total male recovered & 3.10\\
+		Total female recovered & 3.93\\
 		\hline
-	\end{tabular}
 	\caption{Result of simulation}
 	\label{tab:result}
-\end{table}
+\end{longtable}
 
-From the result above, we could see without intervention and treatment, it is high vulnerable for the residents on the STI. Moreover, their recovery is really bad. This is shown in Simulation type $1$. When antibiotics was introduced, the recovery rate is very promising, as shown in Simulation type $2$. However, the antibiotics treatment may be expensive and most elderly housing has no financial capability to do so. In Simulation type $3$, we see both the recovery rate and the infection rate drop when both the intervention methods and antibiotics treatment are implemented. From the financial point of view, using intervention could help to release some of the financial burden from the administrative party for the elderly house. On the other hand, by always resorting to antibiotics treatment for the infected residents could help them to recover from the STI.
+From the result above, we could see without intervention and treatment, it is high vulnerable for the residents on the STI. Moreover, their recovery is really bad. This is shown in Simulation type $1$. 
+
+When we investigate different effect from the using condom and notification of partner, and their combine effect. We could see any of the intervention is effective, as shown in Simulation type $2$, $3$, and $4$. In effect, notification of partner highly prevent any sexual activity, so only a few residents get infected. For the effective usage of condom, the effect is the same, and preventing residents from infected by STI.
+
+When antibiotics was introduced, the recovery rate is very promising, as shown in Simulation type $5$. However, the antibiotics treatment may be expensive and most elderly housing has no financial capability to do so. In Simulation type $6$, we see both the recovery rate and the infection rate drop when both the intervention methods and antibiotics treatment are implemented. From the financial point of view, using intervention could help to release some of the financial burden from the administrative party for the elderly house. On the other hand, by always resorting to antibiotics treatment for the infected residents could help them to recover from the STI.
 
 \section{Verification and Validation}
 \subsection{Assumptions}
@@ -355,10 +408,10 @@ Furthermore, probability distribution of the parameters used in our model is sho
 		Low risk(LR) & Single, 80-95 LR	& Beta(10,100)\\
 		\hline
 		
-		\multicolumn{3}{|c|}{Transmission} \\
+		\multicolumn{3}{|c|}{Transmission: This value will multiply with the original risk} \\
 		\hline
-		Transmission probability & Per act probability & Beta(5.5, 50)))\\
-		With condom protection & condom effect parameter estimate is 1.6 & Beta$(5.5,50)^{1.6}$\\
+		Transmission probability & Per act probability & 1\\
+		With condom protection & condom effect parameter estimate is reducing 50\% of transmission& 0.5\\
 		\hline
 		
 		\multicolumn{3}{|c|}{Natural recovery} \\
@@ -397,6 +450,13 @@ Furthermore, probability distribution of the parameters used in our model is sho
 \end{table}
 
 \subsection{Verification}
+Our conceptual model is based on the workflow in Figure \ref{fig:blockDiagram}. At the beginning, we initiate the Simulation World and allow the residents to be occupied in the room. Typically, room could be divided into two types: paired/couple room, or single room. For single room, sometime it could resides more people of different gender. This is our simplified model of interaction between affected couple.
+
+Subsequently, sexual event may occurs betwee resident of different sex. Based on their age and room type, we assigned different risk to them. The risk will be further augmented or decreased by the usage of condom and whether they notify their partners on their possibilities of getting STI.
+
+Once infected with the STI, they may be treated. The treatment may be antibiotics or natural recovery (which is equivalent to no treatment). Upon recovery, they are back to the community, else they will be logged as infected patients.
+
+In our simulation model, the model was done according to the conceptual model according to the flow chart as described above. Moreover, for repeatability, we set our seed according to the number of the simulation we are currently run. The result are recorded in CSV file for checking of our assumptions and our conceptual model. 
 
 \subsection{Validation}
 What are the model used (cite all the paper)
